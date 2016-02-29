@@ -13,15 +13,18 @@ def sendText():
                                      body="Your Girl Tay Is On Tumblr!")
 
 def check_page():
+	#ask the webpage for the info
 	page = urllib2.urlopen("http://www.istayontumblr.com/").read()
 	page = page.splitlines()
 	N=(len(page))
+	#find the title element
 	for a in range(0, N):
 		a = page[a]
     		if '<title>' in a:
         		Title=(str(a))
 	Title = Title.strip()
 	isSheOn = Title[7]
+	#if it's yes send the text!
 	if(isSheOn == 'Y'):
 		sendText()
 
