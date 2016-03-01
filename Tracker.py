@@ -1,6 +1,7 @@
 # Download the twilio-python library from http://twilio.com/docs/libraries
 from twilio.rest import TwilioRestClient
 import urllib2
+import time
 from apscheduler.schedulers.background import BackgroundScheduler
 #sched = BackgroundScheduler()
 
@@ -14,19 +15,24 @@ def sendText():
 
 def check_page():
 	#ask the webpage for the info
-	page = urllib2.urlopen("http://www.istayontumblr.com/").read()
-	page = page.splitlines()
-	N=(len(page))
-	#find the title element
-	for a in range(0, N):
-		a = page[a]
-    		if '<title>' in a:
-        		Title=(str(a))
-	Title = Title.strip()
-	isSheOn = Title[7]
-	#if it's yes send the text!
-	if(isSheOn == 'Y'):
-		sendText()
+	while(1==1):
+		#wait 10 seconds between checking 
+		time.sleep(10)
+		page = urllib2.urlopen("http://www.istayontumblr.com/").read()
+		page = page.splitlines()
+		N=(len(page))
+		#find the title element
+		for a in range(0, N):
+			a = page[a]
+    			if '<title>' in a:
+        			Title=(str(a))
+		Title = Title.strip()
+		isSheOn = Title[7]
+		#if it's yes send the text!
+		if(isSheOn == 'N'):
+			sendText()
+
+	
 
 check_page()
 #sched.add_job(check_page, 'interval', seconds=10)
