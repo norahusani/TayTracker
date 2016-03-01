@@ -29,7 +29,7 @@ def check_page():
 		Title = Title.strip()
 		isSheOn = Title[7]
 		#if it's yes send the text!
-		if(isSheOn == 'N'):
+		if(isSheOn == 'Y'):
 			sendText()
 
 	
